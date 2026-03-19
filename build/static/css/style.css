@@ -1,0 +1,214 @@
+/* =========================
+   GLOBAL STYLES
+========================= */
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #fdd835; /* Traditional yellow */
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+    background: #800000;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* =========================
+   CONTAINER & GRID
+========================= */
+.container {
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* =========================
+   CARD DESIGN
+========================= */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn, button {
+    background-color: #800000;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.btn:hover, button:hover {
+    background-color: #a00000;
+}
+
+/* =========================
+   TABLE
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+/* =========================
+   BANNER
+========================= */
+.scroll-banner {
+    background-color: #800000;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.hero-section {
+    text-align: center;
+    padding: 50px 30px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    max-width: 850px;
+    margin: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 1;
+}
+
+/* LOGO */
+.hero-logo {
+    width: 240px;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease-in;
+}
+
+/* HEADING */
+.hero-section h1 {
+    color: #800000;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+/* SUBTITLE */
+.hero-section p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 25px;
+}
+
+/* =========================
+   MUGGU BORDER
+========================= */
+.muggu-border {
+    border: 6px solid white;
+    margin: 30px;
+    padding: 60px 20px;
+    border-radius: 20px;
+    position: relative;
+}
+
+/* DOT PATTERN */
+.muggu-border::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 15px;
+    background-image: radial-gradient(white 2px, transparent 2px);
+    background-size: 30px 30px;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+/* =========================
+   BOOKING PAGE
+========================= */
+.booking-container {
+    display: flex;
+    gap: 40px;
+}
+
+.form-section input,
+.form-section textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* =========================
+   SUMMARY BOX
+========================= */
+.summary-section {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   CONFIRMATION PAGE
+========================= */
+.confirmation {
+    text-align: center;
+    padding: 40px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    background: #800000;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

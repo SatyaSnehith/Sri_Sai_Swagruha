@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Featured Items</h2>
+
+<div class="grid">
+{% for item, data in products.items() %}
+
+<div class="card">
+
+    <!-- ✅ IMAGE ADDED -->
+    <img src="{{ url_for('static', filename=data.image) }}" 
+         style="width:100%; height:180px; object-fit:cover; border-radius:8px;">
+
+    <h3>{{ item }}</h3>
+
+    <p>{{ data.desc }}</p>
+
+    <p><b>₹399 per Kg</b></p>
+
+    <form action="/add" method="post">
+        <input type="hidden" name="item" value="{{ item }}">
+        <input type="number" name="qty" value="1" min="1">
+        <button>Add to Cart</button>
+    </form>
+
+</div>
+
+{% endfor %}
+</div>
+
+{% endblock %}
