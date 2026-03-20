@@ -13,13 +13,19 @@
         </a>.
     </p>
 
-   <form method="POST" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="text" name="phone" placeholder="Mobile Number" required>
-        <textarea name="address" placeholder="Delivery Address" required></textarea>
-        <input type="date" name="date" required>
-        <label>Upload Payment Slip:</label>
-        <input type="file" name="slip" required>
+   <form method="POST">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Full Name" required>
+
+        <label for="phone">Mobile Number</label>
+        <input type="text" id="phone" name="phone" placeholder="Mobile Number" required>
+
+        <label for="address">Delivery Address</label>
+        <textarea id="address" name="address" placeholder="Delivery Address" required></textarea>
+
+        <p style="font-size:15px; color:#555; margin:4px 0 12px;">
+            <b style="color:#800000;">Expected delivery date is next day (Telangana)</b>
+        </p>
 
         <p style="font-size:16px;">
             <b style="color:#800000;">Advance Payment Required: ₹{{ advance }}</b>

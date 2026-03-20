@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import os
 from werkzeug.utils import secure_filename
 import urllib.parse
+import uuid
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", os.urandom(24))
 
 # =============================
 # Upload Configuration
@@ -14,7 +16,11 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-cart = []
+
+def get_cart():
+    if "cart" not in session:
+        session["cart"] = []
+    return session["cart"]
 
 # =============================
 # Product Data (UPDATED WITH IMAGES)
@@ -97,26 +103,32 @@ def menu():
 
 @app.route("/add", methods=["POST"])
 def add():
-    item = request.form.get("item")
-    qty = int(request.form.get("qty"))
+    item = request.form.get("item", "").strip()
+    qty_raw = request.form.get("qty", "").strip()
 
-    cart.append({
-        "item": item,
-        "qty": qty
-    })
+    if not item or not qty_raw.isdigit() or int(qty_raw) <= 0:
+        return "Invalid item or quantity", 400
+
+    qty = int(qty_raw)
+    cart = get_cart()
+    cart.append({"item": item, "qty": qty})
+    session.modified = True
 
     return redirect(url_for("cart_page"))
 
 
 @app.route("/delete/<int:index>")
 def delete(index):
-    if index < len(cart):
+    cart = get_cart()
+    if 0 <= index < len(cart):
         cart.pop(index)
+        session.modified = True
     return redirect(url_for("cart_page"))
 
 
 @app.route("/cart")
 def cart_page():
+    cart = get_cart()
     total = sum(i["qty"] * 399 for i in cart)
     advance = round(total * 0.20, 2)
     return render_template("cart.html", cart=cart, total=total, advance=advance)
@@ -124,6 +136,7 @@ def cart_page():
 
 @app.route("/booking", methods=["GET", "POST"])
 def booking():
+    cart = get_cart()
     total = sum(i["qty"] * 399 for i in cart)
     advance = round(total * 0.20, 2)
 
@@ -131,14 +144,6 @@ def booking():
 
         name = request.form.get("name")
         phone = request.form.get("phone")
-        slip = request.files.get("slip")
-
-        if not slip or slip.filename == "":
-            return "⚠️ Please upload payment slip to confirm order!"
-
-        filename = secure_filename(slip.filename)
-        slip.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-
         message = f"""
 New Order Placed!
 
@@ -154,8 +159,6 @@ Order Details:
         message += f"""
 Total Amount: ₹{total}
 Advance Required (20%): ₹{advance}
-
-Payment slip uploaded successfully.
 """
 
         encoded_message = urllib.parse.quote(message)
@@ -164,7 +167,7 @@ Payment slip uploaded successfully.
 
         whatsapp_url = f"https://wa.me/{whatsapp_number}?text={encoded_message}"
 
-        cart.clear()
+        session.pop("cart", None)
 
         return redirect(whatsapp_url)
 
