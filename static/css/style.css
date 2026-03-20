@@ -170,6 +170,29 @@ th, td {
     border: 1px solid #ccc;
 }
 
+.form-section div {
+    margin-bottom: 15px;
+}
+
+@keyframes highlightMove {
+    0% {
+        transform: translateX(0);
+        font-size: 1em;
+    }
+    50% {
+        transform: translateX(10px);
+        font-size: 1.4em;
+    }
+    100% {
+        transform: translateX(0);
+        font-size: 1em;
+    }
+}
+
+.highlight-text {
+    animation: highlightMove 2s infinite alternate;
+}
+
 /* =========================
    SUMMARY BOX
 ========================= */

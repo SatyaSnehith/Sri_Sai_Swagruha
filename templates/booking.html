@@ -2,7 +2,7 @@
     <h2 style="color:#800000;">Booking Details</h2>
 
     <p style="background:#fff3cd; padding:12px; border-radius:8px; font-size:15px; border-left:5px solid #800000;">
-        <b style="color:#800000;">Important:</b>  
+        <b class="highlight-text" style="color:#800000;">Important:</b>  
         Your order will be <b style="color:#800000;">confirmed ONLY after sending 20% advance payment slip</b>  
         to WhatsApp number:
         
@@ -14,14 +14,18 @@
     </p>
 
    <form method="POST">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" placeholder="Full Name" required>
-
-        <label for="phone">Mobile Number</label>
-        <input type="text" id="phone" name="phone" placeholder="Mobile Number" required>
-
-        <label for="address">Delivery Address</label>
-        <textarea id="address" name="address" placeholder="Delivery Address" required></textarea>
+        <div>
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+        </div>
+        <div>
+            <label for="phone">Mobile Number</label>
+            <input type="text" id="phone" name="phone" placeholder="Mobile Number" required>
+        </div>
+        <div>
+            <label for="address">Delivery Address</label>
+            <textarea id="address" name="address" placeholder="Delivery Address" required></textarea>
+        </div>
 
         <p style="font-size:15px; color:#555; margin:4px 0 12px;">
             <b style="color:#800000;">Expected delivery date is next day (Telangana)</b>
