@@ -172,6 +172,13 @@ th, td {
 
 .form-section div {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-section label {
+    font-weight: bold;
+    margin-bottom: 4px;
 }
 
 @keyframes highlightMove {
