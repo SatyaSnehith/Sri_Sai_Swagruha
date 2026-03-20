@@ -9,7 +9,7 @@
 <tr>
 <td>{{ item.item }}</td>
 <td>{{ item.qty }}</td>
-<td>₹{{ item.qty * 399 }}</td>
+<td>₹{{ item.qty * item.price }}</td>
 <td><a href="/delete/{{ loop.index0 }}">Delete</a></td>
 </tr>
 {% endfor %}

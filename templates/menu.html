@@ -16,7 +16,7 @@
 
     <p>{{ data.desc }}</p>
 
-    <p><b>₹399 per Kg</b></p>
+    <p><b>₹{{ data.price }} per Kg</b></p>
 
     <form action="/add" method="post">
         <input type="hidden" name="item" value="{{ item }}">

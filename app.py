@@ -28,63 +28,78 @@ def get_cart():
 products = {
     "Garelu (Pappu)": {
         "desc": "1 Kg - 50 Units | Rice flour, Channa dal, Salt, Red mirchi, Sesame seeds, Spring onion, Coriander, Curry leaves",
-        "image": "images/pappu_garelu.jpeg"
+        "image": "images/pappu_garelu.jpeg",
+        "price": 399
     },
     "Garelu (Palli)": {
         "desc": "1 Kg - 50 Units | Rice flour, Ground nut, Salt, Red mirchi, Sesame seeds, Spring onion, Coriander, Curry leaves",
-        "image": "images/palli_garelu.jpeg"
+        "image": "images/palli_garelu.jpeg",
+        "price": 399
     },
     "Murukulu (Regular)": {
         "desc": "1 Kg - 40 Units | Channa dal, Jeera, Sesame seeds, Coriander cumin powder, Red mirchi, Salt",
-        "image": "images/murukulu_regular.jpeg"
+        "image": "images/murukulu_regular.jpeg",
+        "price": 399
     },
     "Murukulu (Broad)": {
         "desc": "1 Kg - 40 Units | Channa dal, Jeera, Sesame seeds, Coriander cumin powder, Red mirchi, Salt",
-        "image": "images/murukulu_broad.jpeg"
+        "image": "images/murukulu_broad.jpeg",
+        "price": 399
     },
     "Arisalu": {
         "desc": "1 Kg - 24 Units | Jaggery, Rice flour, Sesame seeds",
-        "image": "images/arisalu.jpeg"
+        "image": "images/arisalu.jpeg",
+        "price": 399
     },
     "Karjikayalu": {
         "desc": "1 Kg - 20 Units | Maida, Wheat, Groundnut, Coconut, Sesame seeds, Jaggery, Ravva, Sugar",
-        "image": "images/karjikayalu.jpeg"
+        "image": "images/karjikayalu.jpeg",
+        "price": 399
     },
     "Sunnundalu": {
         "desc": "1 Kg - 24 Units | Ghee, Urad dal, Moong dal, Sugar",
-        "image": "images/sunnundalu.jpeg"
+        "image": "images/sunnundalu.jpeg",
+        "price": 599
     },
     "Boondhi Laddu": {
         "desc": "1 Kg - 24 Units | Channa dal, Sugar, Dry fruits",
-        "image": "images/boondhi_laddu.jpeg"
+        "image": "images/boondhi_laddu.jpeg",
+        "price": 399
     },
     "Ravva Laddu": {
         "desc": "1 Kg - 24 Units | Ravva, Sugar, Dry fruits",
-        "image": "images/ravva_laddu.jpeg"
+        "image": "images/ravva_laddu.jpeg",
+        "price": 399
     },
     "Palli Laddu": {
         "desc": "1 Kg - 20 Units | Groundnut, Jaggery, Sesame seeds",
-        "image": "images/palli_laddu.jpeg"
+        "image": "images/palli_laddu.jpeg",
+        "price": 399
     },
     "Sakinalu (Salted)": {
         "desc": "1 Kg - 55 Units | Rice flour, Jeera, Vamu, Salt",
-        "image": "images/sakinalu_salted.jpeg"
+        "image": "images/sakinalu_salted.jpeg",
+        "price": 399
     },
     "Sakinalu (Karam)": {
         "desc": "1 Kg - 55 Units | Rice flour, Jeera, Red/Green mirchi, Garlic, Vamu, Coriander leaves, Salt",
-        "image": "images/sakinalu_karam.jpeg"
+        "image": "images/sakinalu_karam.jpeg",
+        "price": 399
     },
     "Gavvalu": {
         "desc": "1 Kg - 24 Units | Wheat, Maida, Sugar/Jaggery, Ravva",
-        "image": "images/gavvalu.jpeg"
+        "image": "images/gavvalu.jpeg",
+        "price": 399
     },
     "salividi": {
         "desc": "rice flour, sugar, Dryfruits",
-        "image": "images/salividi.jpeg"
+        "image": "images/salividi.jpeg",
+        "price": 399
     },
     "chuduva": {
         "desc": "karam boondhi",
-        "image": "images/chuduva.jpeg"
+        "image": "images/chuduva.jpeg",
+        "price": 399
     }
 }
 
@@ -110,8 +125,9 @@ def add():
         return "Invalid item or quantity", 400
 
     qty = int(qty_raw)
+    price = products.get(item, {}).get("price", 399)
     cart = get_cart()
-    cart.append({"item": item, "qty": qty})
+    cart.append({"item": item, "qty": qty, "price": price})
     session.modified = True
 
     return redirect(url_for("cart_page"))
@@ -129,7 +145,7 @@ def delete(index):
 @app.route("/cart")
 def cart_page():
     cart = get_cart()
-    total = sum(i["qty"] * 399 for i in cart)
+    total = sum(i["qty"] * i.get("price", 399) for i in cart)
     advance = round(total * 0.20, 2)
     return render_template("cart.html", cart=cart, total=total, advance=advance)
 
@@ -137,7 +153,7 @@ def cart_page():
 @app.route("/booking", methods=["GET", "POST"])
 def booking():
     cart = get_cart()
-    total = sum(i["qty"] * 399 for i in cart)
+    total = sum(i["qty"] * i.get("price", 399) for i in cart)
     advance = round(total * 0.20, 2)
 
     if request.method == "POST":
