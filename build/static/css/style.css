@@ -164,10 +164,40 @@ th, td {
 .form-section input,
 .form-section textarea {
     width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: 1.5px solid #800000;
+}
+
+.form-section div {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-section label {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+@keyframes highlightMove {
+    0% {
+        transform: translateX(0);
+        font-size: 1em;
+    }
+    50% {
+        transform: translateX(10px);
+        font-size: 1.4em;
+    }
+    100% {
+        transform: translateX(0);
+        font-size: 1em;
+    }
+}
+
+.highlight-text {
+    animation: highlightMove 2s infinite alternate;
 }
 
 /* =========================
